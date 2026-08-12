@@ -1,0 +1,22 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.ad2iction.com/
+description: >-
+  Pricing search across TNL Mediagene and its Ad2iction ad-technology subsidiary.
+  No pricing page, plan table, rate card, or machine-readable catalog endpoint is
+  published on any group host. Ad2iction's products (Ad2 Network, Ad2 AIA, DMC,
+  CMP, DMP, DSP/SSP, Panel & Research) are sold through a contact-sales motion, and
+  the Prebid bidder adapter README states outright that integration "requires setup
+  before beginning. Please contact us on https://www.ad2iction.com". Media
+  advertising is priced per insertion order, not per plan.
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+free_tier: false
+self_service_signup: false
+pages_checked:
+  - {url: 'https://www.ad2iction.com/', status: 200, note: product marketing; no pricing section}
+  - {url: 'https://www.ad2iction.com/dmc/', status: 200, note: consulting service page; no pricing}
+  - {url: 'https://www.tnlmediagene.com/', status: 200, note: corporate site; no pricing}
+  - {url: 'https://docs.prebid.org/dev-docs/bidders/ad2iction.html', status: 200, note: 'bidder reference; states setup is contact-gated, no commercial terms'}
+  - {url: 'https://www.tnlmediagene.com/.well-known/api-catalog', status: 404}

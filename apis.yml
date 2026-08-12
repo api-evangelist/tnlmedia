@@ -22,8 +22,12 @@ description: >-
   Glossy Japan. Beyond publishing, the company runs advertising and marketing
   technology (the Ad2iction DSP), an AI-driven customer data and audience
   analytics platform, e-commerce properties, and market-research services. It is
-  a portfolio company of 500 Global. No public developer or API surface is
-  published at this time.
+  a portfolio company of 500 Global and is listed on Nasdaq as TNMG. The group
+  publishes no developer portal, no OpenAPI, and no SDK. Its one public,
+  machine-readable integration surface is the Ad2iction header-bidding adapter
+  shipped inside Prebid.js — a first-party-maintained open-source module that
+  posts bid requests to https://ads.ad2iction.com/html/prebid/, documented on the
+  Prebid.org bidder registry rather than on a TNL Mediagene developer site.
 url: https://raw.githubusercontent.com/api-evangelist/tnlmedia/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -33,7 +37,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-12'
 tags:
 - Company
 - Media
@@ -45,16 +49,58 @@ tags:
 - Content
 - Analytics
 - E-Commerce
-apis: []
+- Header Bidding
+- Programmatic
+- Prebid
+apis:
+- name: Ad2iction Prebid Bid Endpoint
+  description: >-
+    The header-bidding demand endpoint operated by Ad2iction, TNL Mediagene's
+    ad-technology subsidiary (acquired by TNL Media Group in 2020). Publishers
+    reach it through the `ad2iction` bidder adapter shipped in Prebid.js: the
+    adapter POSTs an application/json body carrying `ids` (a JSON array of
+    {bannerId, bidId} pairs, one per ad unit), the OpenRTB 2.x `ortb2` first-party
+    data object, Prebid `refererInfo`, an adapter version constant `v` (currently
+    3), a `udid` read from the first-party ad2udid cookie, and a cache-busting
+    timestamp. The response is a bare JSON array of Prebid bid responses. Banner
+    is the only supported media type; there is no Prebid Server adapter. The call
+    is unauthenticated but placement-gated — the required `id` bid parameter is an
+    Ad2iction-issued placement identifier obtained by contacting the company, and
+    there is no self-service signup.
+  humanURL: https://docs.prebid.org/dev-docs/bidders/ad2iction.html
+  baseURL: https://ads.ad2iction.com/html/prebid/
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tnlmedia.png
+  tags:
+  - AdTech
+  - Advertising
+  - Header Bidding
+  - Prebid
+  - Programmatic
+  - OpenRTB
+  properties:
+  - type: APIReference
+    url: https://docs.prebid.org/dev-docs/bidders/ad2iction.html
+  - type: SourceCode
+    url: https://github.com/prebid/Prebid.js/blob/master/modules/ad2ictionBidAdapter.js
+  - type: Components
+    url: components/tnlmedia-components.yml
+  - type: RateLimits
+    url: rate-limits/tnlmedia-rate-limits.yml
+  - type: Plans
+    url: plans/tnlmedia-plans-pricing.yml
+  - type: Lifecycle
+    url: lifecycle/tnlmedia-lifecycle.yml
+  - type: Conformance
+    url: conformance/tnlmedia-conformance.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 x-enrichment:
-  date: '2026-07-21'
-  status: minimal
-  artifacts_added: 1
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 13
   pass: local-v1
 common:
 - type: DomainSecurity
@@ -65,3 +111,25 @@ common:
   url: https://www.tnlmediagene.com/privacy
 - type: TermsOfService
   url: https://www.tnlmediagene.com/terms
+- type: APIReference
+  url: https://docs.prebid.org/dev-docs/bidders/ad2iction.html
+- type: GitHubOrganization
+  url: https://github.com/tnlmediagene
+- type: Blog
+  url: https://www.tnlmediagene.com/news
+- type: Components
+  url: components/tnlmedia-components.yml
+- type: Packages
+  url: packages/tnlmedia-packages.yml
+- type: Conformance
+  url: conformance/tnlmedia-conformance.yml
+- type: Lifecycle
+  url: lifecycle/tnlmedia-lifecycle.yml
+- type: Plans
+  url: plans/tnlmedia-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/tnlmedia-rate-limits.yml
+- type: LLMsTxt
+  url: llms/tnlmedia-llms.txt
+- type: ContentSignal
+  url: well-known/tnlmedia-content-signals.yml

@@ -1,0 +1,88 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.prebid.org/dev-docs/bidders/ad2iction.html
+description: >-
+  TNL Mediagene's only publicly published, machine-readable client-side integration
+  surface: the Ad2iction Bidder Adapter shipped inside Prebid.js. Ad2iction is TNL
+  Mediagene's ad-technology subsidiary (acquired by TNL Media Group in 2020;
+  described as "its subsidiary Ad2iction" in TNL Mediagene's own December 2025
+  press release). The adapter is a first-party-maintained open-source JavaScript
+  module — maintainer contact prebid@ad2iction.com — that a publisher drops into
+  their Prebid.js build to send header-bidding requests to Ad2iction's demand.
+  This is a client-side embeddable component, not a server SDK; there is no
+  Ad2iction client library on any package registry.
+ownership_note: >-
+  The bid endpoint is on ads.ad2iction.com rather than tnlmediagene.com because the
+  ad-technology business runs under the acquired Ad2iction brand and its own domain.
+  The adapter names prebid@ad2iction.com as maintainer and points integrators at
+  https://www.ad2iction.com for onboarding, and TNL Mediagene's corporate site links
+  ad2iction.com among its own properties.
+docs:
+  - https://docs.prebid.org/dev-docs/bidders/ad2iction.html
+  - https://github.com/prebid/Prebid.js/blob/master/modules/ad2ictionBidAdapter.js
+  - https://github.com/prebid/Prebid.js/blob/master/modules/ad2ictionBidAdapter.md
+libraries:
+  - name: prebid.js
+    purpose: >-
+      Host library. The Ad2iction adapter is a module compiled into a publisher's
+      Prebid.js bundle; it is not distributed as a standalone package.
+    catalogued_in: packages/tnlmedia-packages.yml
+
+families:
+  header_bidding:
+    description: >-
+      Client-side header-bidding demand adapter. Registered with the Prebid.js
+      bidder factory; runs in the publisher's page and posts a bid request to
+      Ad2iction on each auction.
+    components:
+      - name: Ad2iction Bidder Adapter
+        id: ad2iction
+        aliases: [ad2]
+        module: modules/ad2ictionBidAdapter.js
+        module_type: Bidder Adapter
+        maintainer: prebid@ad2iction.com
+        supported_media_types: [banner]
+        safeframes_ok: false
+        prebid_server: false
+        prebid_js: true
+        endpoint:
+          url: https://ads.ad2iction.com/html/prebid/
+          method: POST
+          content_type: application/json
+          with_credentials: false
+          api_version: 3
+          probe: {status: 200, checked: '2026-08-12', body: '[]'}
+        bid_params:
+          - {name: id, type: string, required: true, description: 'Ad2iction banner/placement id issued during onboarding', example: accepted-uuid}
+        request_fields:
+          - {name: ids, type: string, description: 'JSON-encoded array of {bannerId, bidId} pairs, one per ad unit in the auction'}
+          - {name: ortb2, type: object, description: 'OpenRTB 2.x first-party data object passed through from bidderRequest.ortb2'}
+          - {name: refererInfo, type: object, description: 'Prebid refererInfo — page/referrer/topmostLocation context'}
+          - {name: v, type: integer, description: 'Adapter API version constant (currently 3)'}
+          - {name: udid, type: string, description: 'Ad2iction user id read from the first-party ad2udid cookie; empty string when cookies are unavailable'}
+          - {name: _, type: integer, description: 'Cache-busting epoch-millisecond timestamp'}
+        response:
+          shape: array
+          description: >-
+            The endpoint returns a bare JSON array of Prebid bid response objects.
+            The adapter returns [] for any non-array body. No error envelope, status
+            field, or problem-details structure is defined by the adapter.
+        storage:
+          cookie: ad2udid
+          scope: first-party on the publisher's page
+        onboarding: >-
+          Contact-gated. The adapter README states "requires setup before beginning.
+          Please contact us on https://www.ad2iction.com" — the placement id is
+          issued by Ad2iction, there is no self-service signup.
+        verbatim_copies:
+          - components/tnlmedia-ad2iction-prebid-bid-adapter.js
+          - components/tnlmedia-ad2iction-prebid-bid-adapter.md
+        license: Apache-2.0 (Prebid.js); copies retained verbatim with attribution
+
+tag_managers:
+  description: >-
+    Certificate transparency for ad2iction.com exposes tnlmgtag.ad2iction.com and
+    tnlmgtag-test.ad2iction.com, consistent with a TNL Mediagene first-party tag
+    delivered from the Ad2iction infrastructure. No public documentation for the tag
+    was found, so no component is recorded for it.
+  documented: false

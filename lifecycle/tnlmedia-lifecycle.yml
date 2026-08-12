@@ -1,0 +1,57 @@
+generated: '2026-08-12'
+method: derived
+source: components/tnlmedia-components.yml + live probes of TNL Mediagene / Ad2iction hosts
+description: >-
+  Versioning, deprecation and operational-transparency posture for the Ad2iction
+  header-bidding surface — the only public API surface TNL Mediagene publishes.
+  Everything below is either read from the adapter source or recorded as a measured
+  absence. NO StatusPage and NO Deprecation pointer is emitted in apis.yml: neither
+  exists.
+versioning:
+  scheme: request-field
+  current: '3'
+  evidence: >-
+    The Prebid.js adapter sends a constant API_VERSION_NUMBER = 3 as the `v` field
+    on every bid request. There is no URI-path or header version, and the endpoint
+    URL (https://ads.ad2iction.com/html/prebid/) is unversioned.
+  docs: null
+  policy_published: false
+  note: >-
+    Version is negotiated by the adapter, not by the integrator. A publisher does
+    not select a version; they take whatever version ships in the Prebid.js release
+    they compile. Effective version cadence is therefore Prebid.js's release
+    cadence, not Ad2iction's.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  evidence: >-
+    No deprecation or sunset policy is published on ad2iction.com, tnlmediagene.com
+    or the Prebid.org bidder page. RFC 8594 header support could not be observed
+    because the endpoint only answers meaningfully to a well-formed bid POST.
+sla:
+  url: null
+  uptime_target: null
+  published: false
+status_page:
+  url: null
+  found: false
+  evidence: >-
+    No status.* host appears in certificate transparency for ad2iction.com, and no
+    status page is linked from tnlmediagene.com, ad2iction.com or the Prebid.org
+    bidder page.
+changelog:
+  first_party: false
+  evidence: >-
+    Ad2iction publishes no API changelog. Changes to the adapter are visible only as
+    commits in the upstream prebid/Prebid.js repository and in Prebid.js release
+    notes — a third-party record of a first-party module.
+  upstream_proxy: https://github.com/prebid/Prebid.js/releases
+corporate_news:
+  url: https://www.tnlmediagene.com/news
+  status: 200
+  note: >-
+    Corporate and investor news, not an API changelog. Not wired as a ChangeLog
+    pointer — it records company announcements, not contract changes.
+deprecated_operations: []

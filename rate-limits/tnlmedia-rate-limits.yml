@@ -1,0 +1,26 @@
+generated: '2026-08-12'
+method: searched
+source: https://docs.prebid.org/dev-docs/bidders/ad2iction.html
+description: >-
+  Rate-limit search for the Ad2iction header-bidding endpoint. Nothing is published.
+  The Prebid.org bidder reference documents a single bid parameter and no
+  operational limits; the adapter source declares no retry, backoff or throttle
+  behaviour and reads no rate-limit headers from the response. Header-bidding
+  auctions are governed by the publisher's Prebid.js `bidderTimeout` (a client-side
+  timeout, not a provider-published quota), so an integrator has no way to know
+  Ad2iction's actual limits or to detect exhaustion at runtime.
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status_code: null
+retry_after_supported: unknown
+client_side_timeout:
+  mechanism: Prebid.js bidderTimeout
+  owner: publisher
+  note: >-
+    Set by the publisher in their Prebid.js config, not by Ad2iction. It bounds how
+    long the auction waits for a bid response; it is not a provider rate limit.
+pages_checked:
+  - {url: 'https://docs.prebid.org/dev-docs/bidders/ad2iction.html', status: 200, note: no limits documented}
+  - {url: 'https://github.com/prebid/Prebid.js/blob/master/modules/ad2ictionBidAdapter.md', status: 200, note: no limits documented}
+  - {url: 'https://www.ad2iction.com/', status: 200, note: no developer or limits documentation}

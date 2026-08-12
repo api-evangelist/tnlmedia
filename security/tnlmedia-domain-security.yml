@@ -1,11 +1,26 @@
-generated: '2026-07-21'
+generated: '2026-08-12'
 method: probed
-source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+source: live DNS/TLS/HTTP probes of the TNL Mediagene and Ad2iction hosts named in apis.yml
+note: >-
+  docs.prebid.org is the humanURL for the Ad2iction bidder reference but is operated
+  by Prebid.org, not by TNL Mediagene, so it is deliberately excluded from these
+  results — probing it would credit or penalise this company for a domain it does
+  not control.
 hosts:
 - host: www.tnlmediagene.com
   https: true
   tls_version: TLSv1.3
   cert_expires: Sep 24 17:07:58 2026 GMT
+  hsts: false
+- host: ads.ad2iction.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Sep 11 23:59:59 2026 GMT
+  hsts: false
+- host: www.ad2iction.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 13 11:41:22 2026 GMT
   hsts: false
 domains:
 - domain: tnlmediagene.com
@@ -14,3 +29,11 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: quarantine
+- domain: ad2iction.com
+  dnssec: false
+  caa: []
+  spf: true
+  spf_record: 'v=spf1 mx include:amazonses.com include:mailgun.org ?all'
+  dmarc: true
+  dmarc_policy: none
+  nameservers: cloudflare
